@@ -1,0 +1,32 @@
+.formTask {
+  width: 100%;
+  margin-top: -1.8rem;
+  display: flex;
+  justify-content: center;
+}
+
+.formTask input {
+  background: var(--gray-500);
+  border-radius: 0.5rem;
+  border: var(--gray-500);
+  width: 39.87rem;
+  height: 3.375rem;
+  margin-right: 0.5rem;
+}
+
+::placeholder {
+  font-size: 1rem;
+  padding-left: 1rem;
+  color: var--gray-300);
+  line-height: 1.4rem;
+}
+
+.buttonTask {
+  background: var(--blue);
+  width: 5.625rem;
+  height: 3.25rem;
+  padding: 1rem;
+  margin-top: 0.0625rem;
+  display: flex;
+  justify-content: space-between;
+}
