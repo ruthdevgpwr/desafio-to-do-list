@@ -12,11 +12,19 @@
 
   --blue: #4EA8DE;
 
-  --blue: #1E6F9F;
+}
 
-  --red-500: #E25858;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   background: #454545;
+  -webkit-font-smoothing: antialiased;
+}
+
+body, input, textarea, button {
+  font-family: 'Inter', sans-serif;
 }
