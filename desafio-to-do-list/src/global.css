@@ -11,6 +11,9 @@
   --purple-dark: #5E60CE;
 
   --blue: #4EA8DE;
+  --blue-dark: #1e6f9f;
+
+  --danger: #e25858;
 
 }
 
@@ -18,13 +21,17 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
 body {
-  background: #454545;
+  min-height: 100vh;
+  background: var(--gray-600);
+  color: var(--gray-100);
   -webkit-font-smoothing: antialiased;
 }
 
-body, input, textarea, button {
-  font-family: 'Inter', sans-serif;
+
+button {
+  cursor: pointer;
 }
