@@ -44,6 +44,11 @@ export function App() {
     setTitle(event.target.value);
   }
   
+  function deleteTaskById(taskId: string) {
+    const newsTasksWithoutDeleted = tasks.filter((task) => task.id !== taskId);
+    setTasks(newsTasksWithoutDeleted);
+  }
+
   return (
     <>
       <Header />
@@ -65,7 +70,7 @@ export function App() {
         </form>
       </div>
 
-      <Tasks tasks={tasks}/>
+      <Tasks tasks={tasks} onDelete={deleteTaskById}/>
     
     </>
   )
