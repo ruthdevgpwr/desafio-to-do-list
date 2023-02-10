@@ -1,10 +1,11 @@
-import {ChangeEvent, FormEvent, useState} from 'react';
+import {ChangeEvent, FormEvent, useEffect, useState} from 'react';
 import {Header} from './components/Header';
 import styles from './App.module.css';
 import {PlusCircle} from 'phosphor-react';
 import './global.css';
 import {Tasks} from './components/Tasks';
 
+const LOCAL_STORAGE_KEY = "todo:savedTasks";
 export interface ITask {
   id: string;
   title: string;
@@ -13,15 +14,25 @@ export interface ITask {
 
 export function App() {
 
-  const [tasks, setTasks] = useState<ITask[]>([
-    {
-      id: 'teste',
-      title: 'texto de teste',
-      isCompleted: true
-    },
-  ]);
+  const [tasks, setTasks] = useState<ITask[]>([]);
+
+  function loadSavedTasks() {
+    const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (saved) {
+      setTasks(JSON.parse(saved));
+    }
+  }
 
   const [title, setTitle] = useState("");
+
+  function setTasksAndSave(newTasks: ITask[]) {
+    setTasks(newTasks);
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newTasks));
+  }
+
+  useEffect(() => {
+    loadSavedTasks();
+  })
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -30,7 +41,7 @@ export function App() {
   }
 
   function onAddTask(taskTitle: string) {
-    setTasks([
+    setTasksAndSave([
       ...tasks,
       {
         id: crypto.randomUUID(),
@@ -46,7 +57,20 @@ export function App() {
   
   function deleteTaskById(taskId: string) {
     const newsTasksWithoutDeleted = tasks.filter((task) => task.id !== taskId);
-    setTasks(newsTasksWithoutDeleted);
+    setTasksAndSave(newsTasksWithoutDeleted);
+  }
+
+  function toggleTaskCompletedById(taskId: string) {
+    const newTasks = tasks.map(task => {
+      if(task.id === taskId) {
+        return {
+          ...task,
+          isCompleted: !task.isCompleted,
+        }
+      }
+      return task;
+    });
+    setTasksAndSave(newTasks);
   }
 
   return (
@@ -70,7 +94,7 @@ export function App() {
         </form>
       </div>
 
-      <Tasks tasks={tasks} onDelete={deleteTaskById}/>
+      <Tasks tasks={tasks} onDelete={deleteTaskById} onComplete={toggleTaskCompletedById}/>
     
     </>
   )

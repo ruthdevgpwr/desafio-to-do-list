@@ -16,6 +16,14 @@
   margin-right: auto;
 }
 
+p.textCompleted {
+  font-size: 0.875rem;
+  line-height: 1.18rem;
+  color: var(--gray--100);
+  margin-right: auto;
+  text-decoration: line-through;
+}
+
 .checkContainer {
   min-width: 1.125rem;
   height: 1.125rem;
@@ -28,6 +36,12 @@
   height: 100%;
   border: 2px solid var(--blue);
   border-radius: 50%;
+}
+
+.checkContainer svg {
+  width: 100%;
+  height: 100%;
+  color: var(--purple);
 }
 
 .deleteButton {
